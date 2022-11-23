@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
+import { BackLink } from 'components/BackLink/BackLink';
 import * as API from '../../services/api';
 
 export const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
   const { id } = useParams();
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/home';
 
   useEffect(() => {
     async function fetchMovieDetails() {
@@ -19,19 +22,23 @@ export const MovieDetails = () => {
     fetchMovieDetails();
   }, [id]);
 
-  const BASE_IMAGE = `https://image.tmdb.org/t/p/original`;
-
   return (
     <main>
-      {/* кнопка го бєк */}
+      <BackLink to={backLinkHref}>Go back</BackLink>
       <div>
-        {/* <img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="" width={200}/>  */}
-        <img src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`} alt="" width={200}/>
-        <p>{`${movieDetails.title}`}</p>
-        <h2>
-          {/* Product - {MovieDetails.name} - {id} */}
-          MovieDetails
-        </h2>
+        <img
+          src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+          alt=""
+          width={200}
+        />
+        <div>
+          <h2>{movieDetails.title}</h2>
+          <p>User score: {Math.round(movieDetails.vote_average * 10)}%</p>
+          <h3>Overview</h3>
+          <p>{movieDetails.overview}</p>
+          <h3>Genres</h3>
+          <p></p>
+        </div>
       </div>
     </main>
   );
@@ -39,10 +46,11 @@ export const MovieDetails = () => {
 
 // TODO: add alt
 // кнопка назадад
-{/* <div>
+
+/* <div>
   картинка - backdrop_path
   название фильма - title
   оценка пользователей - vote_average
   обзор - overview
   жанры - overview
-</div> */}
+</div> */
