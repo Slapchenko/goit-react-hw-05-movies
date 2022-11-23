@@ -4,7 +4,7 @@ import { BackLink } from 'components/BackLink/BackLink';
 import * as API from '../../services/api';
 
 export const MovieDetails = () => {
-  const [movieDetails, setMovieDetails] = useState({});
+  const [movieDetails, setMovieDetails] = useState(null);
   const { id } = useParams();
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/home';
@@ -13,8 +13,8 @@ export const MovieDetails = () => {
     async function fetchMovieDetails() {
       try {
         const movieDetails = await API.getMovieDetails(id);
-        console.log(movieDetails);
         setMovieDetails(movieDetails);
+        console.log(movieDetails.genres.map(genre => genre.name).join(''));
       } catch (error) {
         // toast.error(`Oops something went wrong, try again.`);
       }
@@ -22,12 +22,16 @@ export const MovieDetails = () => {
     fetchMovieDetails();
   }, [id]);
 
+  if (!movieDetails) {
+    return null;
+  }
+
   return (
     <main>
       <BackLink to={backLinkHref}>Go back</BackLink>
       <div>
         <img
-          src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w500${movieDetails?.poster_path}`}
           alt=""
           width={200}
         />
@@ -37,7 +41,7 @@ export const MovieDetails = () => {
           <h3>Overview</h3>
           <p>{movieDetails.overview}</p>
           <h3>Genres</h3>
-          <p></p>
+          <p>{movieDetails.genres.map(genre => genre.name).join(', ')}</p>
         </div>
       </div>
     </main>
