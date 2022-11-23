@@ -10,7 +10,7 @@ export const MovieDetails = () => {
     async function fetchMovieDetails() {
       try {
         const movieDetails = await API.getMovieDetails(id);
-        console.log(movieDetails)
+        console.log(movieDetails);
         setMovieDetails(movieDetails);
       } catch (error) {
         // toast.error(`Oops something went wrong, try again.`);
@@ -21,13 +21,12 @@ export const MovieDetails = () => {
 
   const BASE_IMAGE = `https://image.tmdb.org/t/p/original`;
 
-  
   return (
     <main>
       {/* кнопка го бєк */}
       <div>
         {/* <img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="" width={200}/>  */}
-        <img src="${BASE_IMAGE}${movieDetails.backdrop_path}" alt="" />
+        <img src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`} alt="" width={200}/>
         <p>{`${movieDetails.title}`}</p>
         <h2>
           {/* Product - {MovieDetails.name} - {id} */}
@@ -37,3 +36,13 @@ export const MovieDetails = () => {
     </main>
   );
 };
+
+// TODO: add alt
+// кнопка назадад
+{/* <div>
+  картинка - backdrop_path
+  название фильма - title
+  оценка пользователей - vote_average
+  обзор - overview
+  жанры - overview
+</div> */}
