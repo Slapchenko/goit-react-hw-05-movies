@@ -22,7 +22,7 @@ export const Home = () => {
     <main>
       <h1>Trending today</h1>
       <ul>
-        {trendingMovies.map(movie => (<li>{movie.title ? movie.title : 'not fuund'}</li>))}
+        {trendingMovies.map(movie => (<li key={movie.id}>{movie.title}</li>))}
       </ul>
     </main>
   );
