@@ -4,12 +4,6 @@ const API_KEY = '3ff086ca8fded08ba42938358b3327b4';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 
-// /trending/get-trending список самых популярных фильмов на сегодня для создания коллекции на главной странице.
-// /search/search-movies поиск кинофильма по ключевому слову на странице фильмов.
-// /movies/get-movie-details запрос полной информации о фильме для страницы кинофильма.
-// /movies/get-movie-credits запрос информации о актёрском составе для страницы кинофильма.
-// /movies/get-movie-reviews запрос обзоров для страницы кинофильма.
-
 export const getTrendingMovies = async () => {
   const response = await axios.get(`trending/all/day?api_key=${API_KEY}`); // ! page ?
   return response.data;
