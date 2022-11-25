@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
 import { BackLink } from 'components/BackLink/BackLink';
 import * as API from '../../services/api';
 
@@ -14,7 +14,6 @@ export const MovieDetails = () => {
       try {
         const movieDetails = await API.getMovieDetails(id);
         setMovieDetails(movieDetails);
-        console.log(movieDetails.genres.map(genre => genre.name).join(''));
       } catch (error) {
         // toast.error(`Oops something went wrong, try again.`);
       }
@@ -43,7 +42,19 @@ export const MovieDetails = () => {
           <h3>Genres</h3>
           <p>{movieDetails.genres.map(genre => genre.name).join(', ')}</p>
         </div>
+        <div>
+          <h3>Additional information</h3>
+          <ul>
+            <li>
+              <Link to="cast">Cast</Link>
+            </li>
+            <li>
+              <Link to="reviews">Reviews</Link>
+            </li>
+          </ul>
+        </div>
       </div>
+      <Outlet />
     </main>
   );
 };
