@@ -24,13 +24,11 @@ export const Home = () => {
       <h1>Trending today</h1>
       <ul>
         {trendingMovies.map(movie => (
-          <Link
-            to={`movies/${movie.id}`}
-            key={movie.id}
-            state={{ from: location }}
-          >
-            <li>{movie.title}</li>
-          </Link>
+          <li key={movie.id}>
+            <Link to={`movies/${movie.id}`} state={{ from: location }}>
+              {movie.title}
+            </Link>
+          </li>
         ))}
       </ul>
     </main>

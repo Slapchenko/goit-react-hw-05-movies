@@ -28,7 +28,7 @@ export const Cast = () => {
     <section>
       <ul>
         {movieCredits.cast.map(cast => (
-          <li>
+          <li key={cast.id}>
             <img
               src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
               alt=""
