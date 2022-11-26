@@ -1,14 +1,14 @@
-export const SearchBox = ({ query, onChange, handleSubmit }) => {
+export const SearchBox = ({ onSubmit }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      {/* <form onSubmit={handleSubmit}> */}
+    <form onSubmit={onSubmit}>
       <input
-        value={query}
+        name="query"
+        // value={query}
         type="text"
         autoComplete="off"
         autoFocus
         placeholder="Search movies"
-        onChange={(e) => onChange(e.target.value)}
+        // onChange={e => onChange(e.target.value)}
       />
       <button type="submit">
         <span>Search</span>

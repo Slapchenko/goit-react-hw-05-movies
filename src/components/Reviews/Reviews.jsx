@@ -6,12 +6,12 @@ import * as API from '../../services/api';
 export const Reviews = () => {
   const [movieReviews, setMovieReviews] = useState(null);
   const { id } = useParams();
-  
- useEffect(() => {
+
+  useEffect(() => {
     async function fetchMovieReviews() {
       try {
         const movieCredits = await API.getMovieReviews(id);
-        setMovieReviews(movieCredits);
+        setMovieReviews(movieCredits.results);
       } catch (error) {
         // toast.error(`Oops something went wrong, try again.`);
       }
@@ -23,8 +23,22 @@ export const Reviews = () => {
     return null;
   }
   return (
-    <main>
-      <div>We don`t have any reviews for this movie</div>
-    </main>
+    <section>
+      {movieReviews > 0 ? (
+        <ul>
+          {movieReviews.map(review => (
+            <li key={review.id}>
+              <p>Author: {review.author}</p>
+              <p>{review.content}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>We don`t have any reviews for this movie</p>
+      )}
+    </section>
+    // <main>
+    //   <div>We don`t have any reviews for this movie</div>
+    // </main>
   );
 };

@@ -7,7 +7,7 @@ export const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { id } = useParams();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/home';
+  const backLinkHref = location.state?.from ?? '/';
 
   useEffect(() => {
     async function fetchMovieDetails() {
@@ -30,7 +30,7 @@ export const MovieDetails = () => {
       <BackLink to={backLinkHref}>Go back</BackLink>
       <div>
         <img
-          src={`https://image.tmdb.org/t/p/w500${movieDetails?.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
           alt=""
           width={200}
         />
@@ -46,10 +46,14 @@ export const MovieDetails = () => {
           <h3>Additional information</h3>
           <ul>
             <li>
-              <Link to="cast">Cast</Link>
+              <Link to="cast" state={backLinkHref}>
+                Cast
+              </Link>
             </li>
             <li>
-              <Link to="reviews">Reviews</Link>
+              <Link to="reviews" state={backLinkHref}>
+                Reviews
+              </Link>
             </li>
           </ul>
         </div>
@@ -60,12 +64,3 @@ export const MovieDetails = () => {
 };
 
 // TODO: add alt
-// кнопка назадад
-
-/* <div>
-  картинка - backdrop_path
-  название фильма - title
-  оценка пользователей - vote_average
-  обзор - overview
-  жанры - overview
-</div> */

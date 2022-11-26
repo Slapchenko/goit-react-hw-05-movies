@@ -30,7 +30,12 @@ export const Cast = () => {
         {movieCredits.cast.map(cast => (
           <li key={cast.id}>
             <img
-              src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+              // src="https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg"
+              src={
+                cast.profile_path
+                  ? `https://image.tmdb.org/t/p/w500${cast.profile_path}`
+                  : 'https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg'
+              }
               alt=""
               width={100}
             />
@@ -45,4 +50,3 @@ export const Cast = () => {
 
 // ! alt
 // заглушка если нету фото
-

@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-// import { Route, Routes, Navigate } from 'react-router-dom';
 import { SharedLayout } from '../SharedLayout';
 import { Home } from '../Home';
 import { Movies } from '../Movies';
