@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
+import {
+  CastSection,
+  CastList,
+  ActorInfo,
+  ActorPhoto,
+  ActorName,
+  Сharacter,
+} from './Cast.styled';
 import * as API from '../../services/api';
 
 export const Cast = () => {
   const [movieCredits, setMovieCredits] = useState(null);
   const { id } = useParams();
-  // const location = useLocation();
 
   useEffect(() => {
     async function fetchMovieCredits() {
@@ -14,39 +21,31 @@ export const Cast = () => {
         const movieCredits = await API.getMovieCredits(id);
         setMovieCredits(movieCredits);
       } catch (error) {
-        // toast.error(`Oops something went wrong, try again.`);
+        toast.error(`Oops something went wrong, try again.`);
       }
     }
     fetchMovieCredits();
   }, [id]);
 
-  if (!movieCredits) {
-    return null;
-  }
-
   return (
-    <section>
-      <ul>
-        {movieCredits.cast.map(cast => (
-          <li key={cast.id}>
-            <img
-              // src="https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg"
-              src={
-                cast.profile_path
-                  ? `https://image.tmdb.org/t/p/w500${cast.profile_path}`
-                  : 'https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg'
-              }
-              alt=""
-              width={100}
-            />
-            <p>{cast.name}</p>
-            <p>{cast.character}</p>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <CastSection>
+      <CastList>
+        {movieCredits &&
+          movieCredits.cast.map(({ id, profile_path, name, character }) => (
+            <ActorInfo key={id}>
+              <ActorPhoto
+                src={
+                  profile_path
+                    ? `https://image.tmdb.org/t/p/w500${profile_path}`
+                    : 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png'
+                }
+                alt={name}
+              />
+              <ActorName>{name}</ActorName>
+              <Сharacter>{character}</Сharacter>
+            </ActorInfo>
+          ))}
+      </CastList>
+    </CastSection>
   );
 };
-
-// ! alt
-// заглушка если нету фото

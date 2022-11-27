@@ -1,20 +1,18 @@
 import { Outlet } from 'react-router-dom';
-import { Header, Link } from './SharedLayout.styled';
+import { Header, Link, Container, Nav } from './SharedLayout.styled';
 
 export const SharedLayout = () => {
   return (
-    <div>
+    <Container>
       <Header>
-        <nav>
+        <Nav>
           <Link to="/" end>
             Home
           </Link>
           <Link to="/movies">Movies</Link>
-        </nav>
+        </Nav>
       </Header>
       <Outlet />
-    </div>
+    </Container>
   );
 };
-
-// поменять див на контейнер
