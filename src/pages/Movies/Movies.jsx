@@ -2,10 +2,10 @@ import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { SearchBox } from '../../components/SearchBox';
-import { Main } from './Movies.styled';
+import { Main, MovieList, MovieItem } from './Movies.styled';
 import * as API from '../../services/api';
 
-export const Movies = () => {
+const Movies = () => {
   const [movie, setMovie] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
@@ -17,6 +17,15 @@ export const Movies = () => {
     async function fetchSearchMovie() {
       try {
         const movie = await API.searchMovie(movieName);
+
+        if (movie.total_results === 0) {
+          toast.warn('Your search did not return any results.', {
+            theme: 'dark',
+          });
+
+          return;
+        }
+
         setMovie(movie.results);
       } catch (error) {
         toast.error(`Oops something went wrong, try again.`);
@@ -29,6 +38,15 @@ export const Movies = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
+
+    if (form.elements.query.value.trim() === '') {
+      toast.warn('In the Search field, enter the text to be searched.', {
+        theme: 'dark',
+      });
+
+      return;
+    }
+
     setSearchParams({ query: form.elements.query.value });
     form.reset();
   };
@@ -37,16 +55,18 @@ export const Movies = () => {
     <Main>
       <SearchBox onSubmit={handleSubmit} />
       {movie && (
-        <ul>
-          {movie.map(movie => (
-            <li key={movie.id}>
-              <Link to={`${movie.id}`} state={{ from: location }}>
-                {movie.title}
+        <MovieList>
+          {movie.map(({ id, title }) => (
+            <MovieItem key={id}>
+              <Link to={`${id}`} state={{ from: location }}>
+                {title}
               </Link>
-            </li>
+            </MovieItem>
           ))}
-        </ul>
+        </MovieList>
       )}
     </Main>
   );
 };
+
+export default Movies;

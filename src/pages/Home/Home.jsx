@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { Main, HeadTitle, TrendingMoviesList, MovieInfo } from './Home.styled';
 import * as API from '../../services/api';
 
-export const Home = () => {
+const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const location = useLocation();
 
@@ -36,3 +36,6 @@ export const Home = () => {
     </Main>
   );
 };
+
+export default Home;
+

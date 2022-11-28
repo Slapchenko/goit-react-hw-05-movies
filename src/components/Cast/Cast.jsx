@@ -31,21 +31,25 @@ export const Cast = () => {
     <CastSection>
       <CastList>
         {movieCredits &&
-          movieCredits.cast.map(({ id, profile_path, name, character }) => (
-            <ActorInfo key={id}>
-              <ActorPhoto
-                src={
-                  profile_path
-                    ? `https://image.tmdb.org/t/p/w500${profile_path}`
-                    : 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png'
-                }
-                alt={name}
-              />
-              <ActorName>{name}</ActorName>
-              <Сharacter>{character}</Сharacter>
-            </ActorInfo>
-          ))}
+          movieCredits.cast.map(
+            ({ cast_id, profile_path, name, character }) => (
+              <ActorInfo key={cast_id}>
+                <ActorPhoto
+                  src={
+                    profile_path
+                      ? `https://image.tmdb.org/t/p/w500${profile_path}`
+                      : 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png'
+                  }
+                  alt={name}
+                />
+                <ActorName>{name}</ActorName>
+                <Сharacter>{character}</Сharacter>
+              </ActorInfo>
+            )
+          )}
       </CastList>
     </CastSection>
   );
 };
+
+export default Cast;

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
 
-export const Box = styled.form`
+export const Box = styled.div`
   padding: 15px;
 `;

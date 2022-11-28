@@ -5,3 +5,9 @@ export const Main = styled.main`
   justify-content: center;
   flex-direction: column;
 `;
+
+export const MovieList = styled.ul``;
+
+export const MovieItem = styled.li`
+  margin-bottom: 10px;
+`;

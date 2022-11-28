@@ -20,7 +20,7 @@ import {
 } from './MovieDetails.styled';
 import * as API from '../../services/api';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { id } = useParams();
   const location = useLocation();
@@ -67,12 +67,12 @@ export const MovieDetails = () => {
         <AdditionalInfoTitle>Additional information</AdditionalInfoTitle>
         <AdditionalInfoList>
           <AdditionalInfoItem>
-            <Link to="cast" state={backLinkHref}>
+            <Link to="cast" state={{ ...location.state }}>
               Cast
             </Link>
           </AdditionalInfoItem>
           <AdditionalInfoItem>
-            <Link to="reviews" state={backLinkHref}>
+            <Link to="reviews" state={{ ...location.state }}>
               Reviews
             </Link>
           </AdditionalInfoItem>
@@ -82,3 +82,5 @@ export const MovieDetails = () => {
     </Main>
   );
 };
+
+export default MovieDetails;

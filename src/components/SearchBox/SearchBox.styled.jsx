@@ -14,7 +14,7 @@ export const SearchForm = styled.form`
 
 export const Input = styled.input`
   display: inline-block;
-  width: 100px;
+  width: 100%;
   font: inherit;
   font-size: 15px;
   border: none;
